@@ -8,13 +8,14 @@ const fadeIn = keyframes`
 
 const Header = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box sx={{
       background: 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)',
-      color: 'white',
-      py: 10,
+      color: 'text.secondary',
+      py: { xs: 8, md: 12 },
       px: 2,
       textAlign: 'center',
       position: 'relative',
@@ -32,49 +33,55 @@ const Header = () => {
     }}>
       <Box sx={{ 
         position: 'relative',
-        animation: `${fadeIn} 1s ease-out`
+        animation: `${fadeIn} 1s ease-out`,
+        maxWidth: 1200,
+        mx: 'auto',
+        px: { xs: 2, sm: 3, md: 4 }
       }}>
         <Typography 
-          variant={isMobile ? 'h3' : 'h2'} 
+          variant={isSmallMobile ? 'h3' : isMobile ? 'h2' : 'h1'} 
           component="h1" 
           sx={{ 
             fontWeight: 700, 
-            mb: 2,
-            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+            mb: { xs: 2, md: 3 },
+            textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+            lineHeight: 1.2
           }}
         >
           Curadoria Especializada
         </Typography>
+        
         <Typography 
-          variant={isMobile ? 'h6' : 'h5'} 
+          variant={isSmallMobile ? 'subtitle1' : 'h5'} 
           component="h2" 
           sx={{ 
-            mb: 4, 
+            mb: { xs: 3, md: 4 }, 
             maxWidth: 800, 
             mx: 'auto',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.2)'
+            textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
+            fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' }
           }}
         >
           Proteção e cuidado personalizado para quem você ama
         </Typography>
+        
         <ScrollLink to="contact" smooth={true} duration={500}>
           <Button 
             variant="contained" 
-            size="large" 
+            size={isSmallMobile ? 'medium' : 'large'}
             sx={{
               backgroundColor: 'white',
-              color: theme.palette.primary.main,
-              px: 4,
-              py: 1.5,
+              color: 'primary.main',
+              px: { xs: 3, md: 4 },
+              py: { xs: 1, md: 1.5 },
               fontWeight: 600,
-              borderRadius: 50,
-              boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-              transition: 'all 0.3s ease',
-              transform: 'translateY(0)',
+              borderRadius: '8px',
+              boxShadow: theme.shadows[4],
+              transition: theme.transitions.create(['transform', 'box-shadow']),
               '&:hover': {
                 backgroundColor: '#f0f0f0',
                 transform: 'translateY(-3px)',
-                boxShadow: '0 6px 20px rgba(0,0,0,0.25)'
+                boxShadow: theme.shadows[6]
               }
             }}
           >
@@ -85,4 +92,5 @@ const Header = () => {
     </Box>
   );
 };
+
 export default Header;

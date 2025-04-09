@@ -3,22 +3,26 @@ import SendIcon from "@mui/icons-material/Send";
 
 const ContactForm = () => {
   return (
-    <Box id="contact" sx={{ mb: 10 }}>
+    <Box id="contact" sx={{ mb: { xs: 6, md: 10 } }}>
       <Typography
-        variant="h4"
+        variant="h2"
         component="h2"
         sx={{
           fontWeight: 600,
-          mb: 6,
+          mb: { xs: 4, md: 6 },
           textAlign: "center",
-          color: "#333",
+          color: "text.primary",
         }}
       >
-        Mande uma mesangem
+        Mande uma mensagem
       </Typography>
-      <Grid container spacing={4}>
-        <Grid>
-          <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
+      
+      <Grid container justifyContent="center">
+        <Grid >
+          <Paper elevation={3} sx={{ 
+            p: { xs: 2, sm: 3, md: 4 },
+            borderRadius: 2 
+          }}>
             <form>
               <TextField
                 fullWidth
@@ -50,16 +54,26 @@ const ContactForm = () => {
                 rows={4}
                 required
               />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                size="large"
-                endIcon={<SendIcon />}
-                sx={{ mt: 3, px: 4, py: 1.5, borderRadius: 50 }}
-              >
-                Enviar Mensagem
-              </Button>
+              <Box sx={{ textAlign: 'center', mt: 3 }}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  endIcon={<SendIcon />}
+                  sx={{ 
+                    px: 4, 
+                    py: 1.5, 
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    '&:hover': {
+                      backgroundColor: 'secondary.main'
+                    }
+                  }}
+                >
+                  Enviar Mensagem
+                </Button>
+              </Box>
             </form>
           </Paper>
         </Grid>
@@ -67,4 +81,5 @@ const ContactForm = () => {
     </Box>
   );
 };
+
 export default ContactForm;
