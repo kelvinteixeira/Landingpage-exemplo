@@ -47,7 +47,7 @@ Solução completa para criação de landing pages de alta conversão, desenvolv
 
 ```bash
 # Clonar repositório
-git clone https://github.com/kelvinteixeira/codevibe.git
+https://github.com/kelvinteixeira/Landingpage-exemplo.git
 cd codevibe
 
 # Instalar dependências
