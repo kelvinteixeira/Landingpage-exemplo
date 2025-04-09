@@ -1,55 +1,57 @@
-# React + TypeScript + Vite
+# 🚀 Serviço de Landing Pages Profissionais
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 💡 Sobre o Projeto
 
-Currently, two official plugins are available:
+Solução completa para criação de landing pages de alta conversão, desenvolvida com as melhores práticas de:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Design UI/UX** - Interfaces modernas e intuitivas  
+- **Performance** - Otimização para máxima velocidade  
+- **Conversão** - Elementos estratégicos para captação de leads  
+- **Responsividade** - Adaptação perfeita a todos os dispositivos  
 
-## Expanding the ESLint configuration
+**Benefícios principais:**  
+✔ Templates profissionais prontos para uso  
+✔ Total personalização para sua marca  
+✔ Integração com ferramentas de marketing  
+✔ Analytics integrado para acompanhamento  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+![Preview 1](./public/images/showcase1.png)
+![Preview 2](./public/images/showcase2.png)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## ✨ Diferenciais
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Feature | Vantagem |
+|---------|----------|
+| Design Modular | Facilidade na customização |
+| SEO Otimizado | Melhor posicionamento |
+| CTAs Estratégicos | Maior taxa de conversão |
+| Formulários Inteligentes | Captação eficiente de leads |
+| Hospedagem Incluída | Solução completa |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+> "Transforme visitantes em clientes com landing pages que realmente convertem"
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
-# Landingpage-exemplo
+## 🛠 Tecnologias
+
+- React.js
+- TypeScript
+- Material UI
+- Vite.js
+- SEO Tools
+
+## ⚙️ Como Usar
+
+**Pré-requisitos:**
+- Node.js (v18+)
+- npm/yarn
+- Git
+
+```bash
+# Clonar repositório
+git clone https://github.com/kelvinteixeira/codevibe.git
+cd codevibe
+
+# Instalar dependências
+npm install
+
+# Rodar ambiente de desenvolvimento
+npm run dev
