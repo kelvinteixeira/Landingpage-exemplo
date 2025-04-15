@@ -1,4 +1,4 @@
-# ⚖️ João Vitor Advocacia - Curatela e Direito Civil
+# ⚖️ João Vitor Advocacia - Curatela e Direito Previdênciario
 
 ## 💼 Sobre o Projeto
 
@@ -53,10 +53,10 @@ Este projeto foi cuidadosamente estruturado para:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/kelvinteixeira/codevibe.git
+git clone https://github.com/kelvinteixeira/Landingpage-exemplo.git
 
 # Acesse o diretório do projeto
-cd codevibe
+cd landaingpage-exemplo
 
 # Instale as dependências
 yarn
