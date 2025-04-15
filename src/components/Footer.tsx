@@ -18,7 +18,7 @@ export const Footer = () => {
       <Box>
         <img
           style={{ width: isMobile ? 150 : 200, }}
-          src="/public/images/jv-logo-black.png"
+          src="/images/jv-logo-black.png"
           alt="Logo de João Vitor Advogado"
         />
       </Box>
