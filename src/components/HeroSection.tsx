@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   Box,
   Typography,
@@ -11,6 +12,41 @@ import {
 import { ContactForm } from "./ContactForm";
 import { useWhatsApp } from "../hooks/useWhatsapp";
 
+// Variantes de animação
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
+const floatingVariants = {
+  animate: {
+    y: [0, -15, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
 export const HeroSection = () => {
   const { onClick } = useWhatsApp();
   const theme = useTheme();
@@ -18,6 +54,10 @@ export const HeroSection = () => {
 
   return (
     <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
       sx={{
         position: "relative",
         height: "100vh",
@@ -33,15 +73,23 @@ export const HeroSection = () => {
     >
       {/* Header */}
       <Box
+        component={motion.div}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
         sx={{
           padding: { xs: 2, md: 3 },
           display: "flex",
           alignItems: "center",
-          justifyContent: isMobile? "center": "",
+          justifyContent: isMobile ? "center" : "",
           ml: isMobile ? 0 : 50,
         }}
       >
-        <img style={{width: 200, zIndex: 10}} src="/images/jv-logo-white.png" alt="Foto do João Vitor Advogado" />
+        <img 
+          style={{ width: 200, zIndex: 10 }} 
+          src="/images/jv-logo-white.png" 
+          alt="Foto do João Vitor Advogado" 
+        />
       </Box>
 
       {/* Main Content */}
@@ -55,6 +103,10 @@ export const HeroSection = () => {
         }}
       >
         <Box
+          component={motion.div}
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
           sx={{
             display: "flex",
             flexDirection: isMobile ? "column" : "row",
@@ -76,6 +128,8 @@ export const HeroSection = () => {
             }}
           >
             <Divider
+              component={motion.div}
+              variants={itemVariants}
               sx={{
                 width: "120px",
                 height: "8px",
@@ -86,6 +140,8 @@ export const HeroSection = () => {
             />
 
             <Typography
+              component={motion.h1}
+              variants={itemVariants}
               variant="h1"
               sx={{
                 background: `${theme.palette.primary.contrastText}`,
@@ -98,8 +154,9 @@ export const HeroSection = () => {
             </Typography>
 
             <Typography
+              component={motion.h2}
+              variants={itemVariants}
               variant={isMobile ? "body1" : "h6"}
-              component="h2"
               sx={{
                 color: theme.palette.text.primary,
                 maxWidth: "90%",
@@ -118,11 +175,19 @@ export const HeroSection = () => {
             </Typography>
 
             <Stack
+              component={motion.div}
+              variants={itemVariants}
               direction={isMobile ? "column" : "row"}
               spacing={2}
               sx={{ mt: 3 }}
             >
               <Button
+                component={motion.button}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: `0 4px 12px ${theme.palette.secondary.main}80`,
+                }}
+                whileTap={{ scale: 0.98 }}
                 variant="contained"
                 onClick={() => onClick()}
                 size="large"
@@ -146,12 +211,23 @@ export const HeroSection = () => {
           </Box>
 
           {/* Right Side - Form */}
-          {!isMobile && <ContactForm />}
+          {!isMobile && (
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <ContactForm />
+            </motion.div>
+          )}
         </Box>
       </Container>
 
       {/* Decorative Elements */}
       <Box
+        component={motion.div}
+        variants={floatingVariants}
+        animate="animate"
         sx={{
           position: "absolute",
           bottom: 0,
@@ -167,6 +243,9 @@ export const HeroSection = () => {
       />
 
       <Box
+        component={motion.div}
+        variants={floatingVariants}
+        animate="animate"
         sx={{
           position: "absolute",
           top: "-100px",

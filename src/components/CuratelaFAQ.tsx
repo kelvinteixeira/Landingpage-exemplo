@@ -9,11 +9,55 @@ import {
   Container,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 
 export const CuratelaFAQ = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isSmallMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // Animation controls
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 30,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
 
   const faqItems = [
     {
@@ -39,205 +83,160 @@ export const CuratelaFAQ = () => {
   ];
 
   return (
-    <Stack
-      sx={{
-        backgroundImage: `
-          linear-gradient(${theme.palette.primary.main}a6, ${theme.palette.primary.main}ba),
-          url(/images/hero-bg6.jpg)
-        `,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        py: isMobile ? 6 : 10,
-        pb: isMobile ? 8 : 12,
-      }}
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={containerVariants}
     >
-      <Container maxWidth="xl">
-        <Typography
-          variant="h2"
-          component="h2"
-          sx={{
-            fontWeight: 700,
-            color: "text.primary",
-            textAlign: "center",
-            fontSize: isSmallMobile ? "1.8rem" : isMobile ? "2rem" : "2.5rem",
-            mb: 2,
-            px: isMobile ? 2 : 0,
-          }}
-        >
-          Perguntas Frequentes sobre Curatela
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          sx={{
-            color: "text.primary",
-            textAlign: "center",
-            fontSize: isMobile ? "1rem" : "1.2rem",
-            mb: isMobile ? 4 : 6,
-            px: isMobile ? 2 : 0,
-          }}
-        >
-          Veja as respostas para as dúvidas mais comuns sobre nossos serviços.
-        </Typography>
-
-        <Stack
-          direction={isMobile ? "column" : "row"}
-          spacing={isMobile ? 3 : 6}
-          justifyContent="center"
-          alignItems={isMobile ? "center" : "flex-start"}
-          flexWrap="wrap"
-        >
-          {/* First Column */}
-          <Stack
-            direction="column"
-            spacing={isMobile ? 3 : 4}
-            sx={{ width: { xs: "100%", md: "45%" }, px: isMobile ? 2 : 0 }}
+      <Stack
+        sx={{
+          backgroundImage: `
+            linear-gradient(${theme.palette.primary.main}a6, ${theme.palette.primary.main}ba),
+            url(/images/hero-bg6.jpg)
+          `,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          py: isMobile ? 6 : 10,
+          pb: isMobile ? 8 : 12,
+        }}
+      >
+        <Container maxWidth="xl">
+          <Typography
+            component={motion.div}
+            variants={itemVariants}
+            variant="h2"
+            sx={{
+              fontWeight: 700,
+              color: "text.primary",
+              textAlign: "center",
+              fontSize: isSmallMobile ? "1.8rem" : isMobile ? "2rem" : "2.5rem",
+              mb: 2,
+              px: isMobile ? 2 : 0,
+            }}
           >
-            {faqItems.slice(0, 2).map((item, index) => (
-              <Accordion
-                key={index}
-                sx={{
-                  width: "100%",
-                  boxShadow: theme.shadows[3],
-                  borderRadius: "12px !important",
-                  overflow: "hidden",
-                  transition: "all 0.3s ease",
-                  "&:before": { display: "none" },
-                  "&:hover": {
-                    boxShadow: theme.shadows[6],
-                  },
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={
-                    <ExpandMoreIcon
-                      sx={{
-                        fontSize: "1.8rem",
-                        color: "secondary.main",
-                      }}
-                    />
-                  }
-                  sx={{
-                    py: isMobile ? 2 : 3,
-                    px: isMobile ? 3 : 4,
-                    minHeight: "72px",
-                    backgroundColor: theme.palette.grey[100],
-                    "&.Mui-expanded": {
-                      backgroundColor: theme.palette.grey[200],
-                      borderBottom: `1px solid ${theme.palette.divider}`,
-                    },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontWeight: 700,
-                      fontSize: isMobile ? "1.1rem" : "1.2rem",
-                      flex: 1,
-                      color: "primary.main",
-                    }}
-                  >
-                    {item.question}
-                  </Typography>
-                </AccordionSummary>
+            Perguntas Frequentes sobre Curatela
+          </Typography>
 
-                <AccordionDetails
-                  sx={{
-                    py: isMobile ? 2 : 3,
-                    px: isMobile ? 3 : 4,
-                    backgroundColor: theme.palette.background.paper,
-                    height: isMobile ? "auto" : "200px",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: "text.secondary",
-                      lineHeight: 1.7,
-                      fontSize: isMobile ? "1rem" : "1.1rem",
-                    }}
-                  >
-                    {item.answer}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-          </Stack>
-
-          {/* Second Column */}
-          <Stack
-            direction="column"
-            spacing={isMobile ? 3 : 4}
-            sx={{ width: { xs: "100%", md: "45%" }, px: isMobile ? 2 : 0 }}
+          <Typography
+            component={motion.div}
+            variants={itemVariants}
+            variant="subtitle1"
+            sx={{
+              color: "text.primary",
+              textAlign: "center",
+              fontSize: isMobile ? "1rem" : "1.2rem",
+              mb: isMobile ? 4 : 6,
+              px: isMobile ? 2 : 0,
+            }}
           >
-            {faqItems.slice(2, 4).map((item, index) => (
-              <Accordion
-                key={index}
-                sx={{
-                  width: "100%",
-                  boxShadow: theme.shadows[3],
-                  borderRadius: "12px !important",
-                  overflow: "hidden",
-                  transition: "all 0.3s ease",
-                  "&:before": { display: "none" },
-                  "&:hover": {
-                    boxShadow: theme.shadows[6],
-                  },
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={
-                    <ExpandMoreIcon
-                      sx={{
-                        fontSize: "1.8rem",
-                        color: "secondary.main",
-                      }}
-                    />
-                  }
-                  sx={{
-                    py: isMobile ? 2 : 3,
-                    px: isMobile ? 3 : 4,
-                    minHeight: "72px",
-                    backgroundColor: theme.palette.grey[100],
-                    "&.Mui-expanded": {
-                      backgroundColor: theme.palette.grey[200],
-                      borderBottom: `1px solid ${theme.palette.divider}`,
-                    },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontWeight: 700,
-                      fontSize: isMobile ? "1.1rem" : "1.2rem",
-                      flex: 1,
-                      color: "primary.main",
-                    }}
-                  >
-                    {item.question}
-                  </Typography>
-                </AccordionSummary>
+            Veja as respostas para as dúvidas mais comuns sobre nossos serviços.
+          </Typography>
 
-                <AccordionDetails
-                  sx={{
-                    py: isMobile ? 2 : 3,
-                    px: isMobile ? 3 : 4,
-                    backgroundColor: theme.palette.background.paper,
-                    height: isMobile ? "auto" : "200px",
-                  }}
-                >
-                  <Typography
+          <Stack
+            direction={isMobile ? "column" : "row"}
+            spacing={isMobile ? 3 : 6}
+            justifyContent="center"
+            alignItems={isMobile ? "center" : "flex-start"}
+            flexWrap="wrap"
+          >
+            <motion.div
+              custom={0}
+              variants={{
+                hidden: { opacity: 0, x: isMobile ? 0 : -50 },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  transition: { duration: 0.8, ease: "easeOut" },
+                },
+              }}
+            >
+              <Stack
+                direction="column"
+                justifyContent={"center"}
+                alignItems={"center"}
+                spacing={isMobile ? 3 : 4}
+                sx={{ width: { xs: "100%",  }, px: isMobile ? 2 : 0 }}
+              >
+                {faqItems.map((item, index) => (
+                  <Accordion
+                    key={index}
+                    component={motion.div}
+                    variants={itemVariants}
                     sx={{
-                      color: "text.secondary",
-                      lineHeight: 1.7,
-                      fontSize: isMobile ? "1rem" : "1.1rem",
+                      width: "100%",
+                      boxShadow: theme.shadows[3],
+                      borderRadius: "12px !important",
+                      overflow: "hidden",
+                      transition: "all 0.3s ease",
+                      "&:before": { display: "none" },
+                      "&:hover": {
+                        boxShadow: theme.shadows[6],
+                      },
                     }}
                   >
-                    {item.answer}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            ))}
+                    <AccordionSummary
+                      expandIcon={
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <ExpandMoreIcon
+                            sx={{
+                              fontSize: "1.8rem",
+                              color: "secondary.main",
+                            }}
+                          />
+                        </motion.div>
+                      }
+                      sx={{
+                        py: isMobile ? 2 : 3,
+                        px: isMobile ? 3 : 4,
+                        minHeight: "72px",
+                        backgroundColor: theme.palette.grey[100],
+                        "&.Mui-expanded": {
+                          backgroundColor: theme.palette.grey[200],
+                          borderBottom: `1px solid ${theme.palette.divider}`,
+                        },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: isMobile ? "1.1rem" : "1.2rem",
+                          flex: 1,
+                          color: "primary.main",
+                        }}
+                      >
+                        {item.question}
+                      </Typography>
+                    </AccordionSummary>
+
+                    <AccordionDetails
+                      sx={{
+                        py: isMobile ? 2 : 3,
+                        px: isMobile ? 3 : 4,
+                        backgroundColor: theme.palette.background.paper,
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: "text.secondary",
+                          lineHeight: 1.7,
+                          fontSize: isMobile ? "1rem" : "1.1rem",
+                        }}
+                      >
+                        {item.answer}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                ))}
+              </Stack>
+            </motion.div>
           </Stack>
-        </Stack>
-      </Container>
-    </Stack>
+        </Container>
+      </Stack>
+    </motion.div>
   );
 };

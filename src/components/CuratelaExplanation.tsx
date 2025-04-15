@@ -1,14 +1,93 @@
 import { Box, Typography, Button, useMediaQuery, Divider } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useWhatsApp } from "../hooks/useWhatsapp";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 
 export const CuratelaExplanation = () => {
   const { onClick } = useWhatsApp();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  
+  // Animation controls
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20 
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const imageVariants = {
+    hidden: { 
+      opacity: 0, 
+      x: isMobile ? 0 : -50 
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const contentVariants = {
+    hidden: { 
+      opacity: 0, 
+      x: isMobile ? 0 : 50 
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
     <Box
+      ref={ref}
+      component={motion.div}
+      initial="hidden"
+      animate={controls}
+      variants={containerVariants}
       sx={{
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
@@ -17,10 +96,13 @@ export const CuratelaExplanation = () => {
         py: 8,
         px: isMobile ? 4 : 8,
         bgcolor: "background.paper",
+        overflow: "hidden"
       }}
     >
       {/* Left Side - Image */}
       <Box
+        component={motion.div}
+        variants={imageVariants}
         sx={{
           flex: 1,
           minWidth: isMobile ? "100%" : "50%",
@@ -28,25 +110,27 @@ export const CuratelaExplanation = () => {
           overflow: "hidden",
           boxShadow: 3,
           height: isMobile ? "300px" : "500px",
-          "& img": {
+        }}
+      >
+        <motion.img
+          src="/images/curatela-explanation-image.jpg"
+          alt="Advogado especializado em curatela"
+          style={{
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            transition: "transform 0.3s ease",
-            "&:hover": {
-              transform: "scale(1.03)",
-            },
-          },
-        }}
-      >
-        <img
-          src="/images/curatela-explanation-image.jpg"
-          alt="Advogado especializado em curatela"
+          }}
+          whileHover={{
+            scale: 1.03,
+            transition: { duration: 0.3 }
+          }}
         />
       </Box>
 
       {/* Right Side - Content */}
       <Box
+        component={motion.div}
+        variants={contentVariants}
         sx={{
           flex: 1,
           display: "flex",
@@ -56,8 +140,9 @@ export const CuratelaExplanation = () => {
         }}
       >
         <Typography
+          component={motion.div}
+          variants={itemVariants}
           variant="h2"
-          component="h1"
           sx={{
             fontWeight: 700,
             color: "primary.main",
@@ -67,7 +152,10 @@ export const CuratelaExplanation = () => {
         >
           O que é a Curatela?
         </Typography>
+
         <Divider
+          component={motion.div}
+          variants={itemVariants}
           sx={{
             width: "120px",
             height: "8px",
@@ -78,6 +166,8 @@ export const CuratelaExplanation = () => {
         />
 
         <Typography
+          component={motion.div}
+          variants={itemVariants}
           variant="body1"
           sx={{
             fontSize: isMobile ? "1rem" : "1.1rem",
@@ -94,6 +184,8 @@ export const CuratelaExplanation = () => {
         </Typography>
 
         <Typography
+          component={motion.div}
+          variants={itemVariants}
           variant="body1"
           sx={{
             fontSize: isMobile ? "1rem" : "1.1rem",
@@ -108,9 +200,16 @@ export const CuratelaExplanation = () => {
         </Typography>
 
         <Button
+          component={motion.div}
+          variants={itemVariants}
           onClick={() => onClick()}
           variant="contained"
           size="large"
+          whileHover={{ 
+            y: -2,
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{ scale: 0.98 }}
           sx={{
             alignSelf: "flex-start",
             px: 4,
@@ -121,7 +220,6 @@ export const CuratelaExplanation = () => {
             color: "primary.contrastText",
             "&:hover": {
               backgroundColor: "primary.dark",
-              transform: "translateY(-2px)",
               boxShadow: 2,
             },
           }}

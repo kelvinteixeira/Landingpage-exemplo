@@ -9,13 +9,92 @@ import {
 } from "@mui/material";
 import { ServiceItem } from "./ServiceItem";
 import { theme } from "../theme/Theme";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 
 export const CuratelaServices = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  // Animation controls
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30 
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const columnVariants = {
+    hidden: { 
+      opacity: 0,
+      x: isMobile ? 0 : -50
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const rightColumnVariants = {
+    hidden: { 
+      opacity: 0,
+      x: isMobile ? 0 : 50
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <Box
+      ref={ref}
+      component={motion.div}
+      initial="hidden"
+      animate={controls}
+      variants={containerVariants}
       sx={{
         position: "relative",
         overflow: "hidden",
@@ -35,6 +114,8 @@ export const CuratelaServices = () => {
           justifyContent={"center"}
         >
           <Typography
+            component={motion.div}
+            variants={itemVariants}
             variant="h2"
             sx={{
               textAlign: "center",
@@ -48,6 +129,8 @@ export const CuratelaServices = () => {
             Com nosso serviço de curatela você terá:
           </Typography>
           <Divider
+            component={motion.div}
+            variants={itemVariants}
             sx={{
               width: isMobile ? "250px" : "350px",
               height: "6px",
@@ -68,6 +151,8 @@ export const CuratelaServices = () => {
         >
           {/* Left Column */}
           <Stack
+            component={motion.div}
+            variants={columnVariants}
             direction="column"
             spacing={isMobile ? 3 : 5}
             sx={{ 
@@ -98,6 +183,8 @@ export const CuratelaServices = () => {
 
           {/* Right Column */}
           <Stack
+            component={motion.div}
+            variants={rightColumnVariants}
             direction="column"
             spacing={isMobile ? 3 : 5}
             sx={{ 
@@ -130,6 +217,10 @@ export const CuratelaServices = () => {
 
       {/* Wave Background */}
       <Box
+        component={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
         sx={{
           position: "absolute",
           bottom: 0,
