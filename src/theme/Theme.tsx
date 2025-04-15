@@ -1,18 +1,50 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 // Cria o tema base com paleta de cores personalizada
-const darkBlueTheme = createTheme({
+const customTheme = createTheme({
   palette: {
     primary: {
-      main: "#2575fc",
+      main: "#000080", // Navy Blue - Azul marinho
+      light: "#1A1A8B", // Navy Blue claro
+      dark: "#000066", // Navy Blue escuro
+      contrastText: "#FFFFFF", // Texto branco
     },
     secondary: {
-      main: "#6a11cb",
+      main: "#DAA520", // Golden Rod - Dourado terroso
+      light: "#E6B949", // Golden Rod claro
+      dark: "#B8860B", // Golden Rod escuro
+      contrastText: "#121212", // Texto preto
+    },
+    background: {
+      default: "#F5F5F5", // Cinza claro de fundo
+      paper: "#FFFFFF", // Branco para superfícies
     },
     text: {
-      primary: '#000000',
-      secondary: '#fcfcfc'
-    }
+      primary: "#ffffff", // Cinza chumbo (dark slate gray) para texto primário
+      secondary: "#000000", // Cinza chumbo mais claro (slate gray)
+      disabled: "#A9A9A9", // Cinza escuro para texto desabilitado
+    },
+    grey: {
+      50: "#F8F8F8", // Cinza super claro
+      100: "#E8E8E8",
+      200: "#D8D8D8",
+      300: "#C0C0C0", // Cinza médio
+      400: "#A9A9A9", // Dark gray
+      500: "#808080", // Gray
+      600: "#696969", // Dim gray
+      700: "#4F4F4F", // Dark slate gray
+      800: "#363636", // Quase preto
+      900: "#212121", // Preto
+    },
+    success: {
+      main: "#2E7D32", // Verde mantido para sucesso
+    },
+    warning: {
+      main: "#DAA520", // Golden Rod para avisos
+    },
+    info: {
+      main: "#000080", // Navy Blue para informações
+    },
   },
   breakpoints: {
     values: {
@@ -26,40 +58,43 @@ const darkBlueTheme = createTheme({
   typography: {
     fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontSize: '2.5rem',
+      fontSize: "5rem",
       fontWeight: 700,
-      lineHeight: 1.2,
-      [createTheme().breakpoints.up('md')]: {
-        fontSize: '3.5rem',
+      color: "#ffffff", // Cinza chumbo
+      [createTheme().breakpoints.up("md")]: {
+        fontSize: "3.5rem",
       },
-      [createTheme().breakpoints.up('lg')]: {
-        fontSize: '4rem',
+      [createTheme().breakpoints.up("lg")]: {
+        fontSize: "4rem",
       },
     },
     h2: {
-      fontSize: '2rem',
+      fontSize: "2.5rem",
       fontWeight: 600,
-      [createTheme().breakpoints.up('md')]: {
-        fontSize: '2.5rem',
+      color: "#000080", // Navy Blue
+      [createTheme().breakpoints.up("md")]: {
+        fontSize: "2.5rem",
       },
-      [createTheme().breakpoints.up('lg')]: {
-        fontSize: '3rem',
+      [createTheme().breakpoints.up("lg")]: {
+        fontSize: "3rem",
       },
     },
     h3: {
-      fontSize: '1.75rem',
-      [createTheme().breakpoints.up('md')]: {
-        fontSize: '2rem',
+      fontSize: "1.75rem",
+      color: "#ffffff", // Cinza chumbo
+      [createTheme().breakpoints.up("md")]: {
+        fontSize: "2rem",
       },
     },
     body1: {
-      fontSize: '1rem',
-      [createTheme().breakpoints.up('md')]: {
-        fontSize: '1.1rem',
+      fontSize: "1rem",
+      color: "#ffffff", // Cinza chumbo
+      [createTheme().breakpoints.up("md")]: {
+        fontSize: "1.1rem",
       },
     },
     button: {
-      textTransform: 'none',
+      textTransform: "none",
       fontWeight: 500,
     },
   },
@@ -67,57 +102,99 @@ const darkBlueTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none',
-          borderRadius: '8px',
-          padding: '8px 22px',
-          fontSize: '1rem',
-          [createTheme().breakpoints.up('md')]: {
-            padding: '10px 24px',
-            fontSize: '1.05rem',
+          textTransform: "none",
+          borderRadius: "8px",
+          padding: "8px 22px",
+          fontSize: "1rem",
+          [createTheme().breakpoints.up("md")]: {
+            padding: "10px 24px",
+            fontSize: "1.05rem",
           },
         },
         containedPrimary: {
-          '&:hover': {
-            backgroundColor: '#ae00ff'
-          }
-        }
-      }
+          backgroundColor: "#000080", // Navy Blue
+          "&:hover": {
+            backgroundColor: "#000066", // Navy Blue escuro
+            boxShadow: "0 2px 4px rgba(0, 0, 128, 0.3)",
+          },
+        },
+        containedSecondary: {
+          backgroundColor: "#DAA520", // Golden Rod
+          color: "#121212",
+          "&:hover": {
+            backgroundColor: "#B8860B", // Golden Rod escuro
+            boxShadow: "0 2px 4px rgba(218, 165, 32, 0.3)",
+          },
+        },
+        outlinedPrimary: {
+          borderColor: "#000080", // Navy Blue
+          color: "#000080",
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 128, 0.04)",
+          },
+        },
+        outlinedSecondary: {
+          borderColor: "#DAA520", // Golden Rod
+          color: "#DAA520",
+          "&:hover": {
+            backgroundColor: "rgba(218, 165, 32, 0.04)",
+          },
+        },
+      },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundImage: 'none',
-          padding: '16px',
-          [createTheme().breakpoints.up('sm')]: {
-            padding: '20px',
+          backgroundImage: "none",
+          padding: "16px",
+          backgroundColor: "#FFFFFF", // Branco puro
+          border: "1px solid #E8E8E8", // Borda sutil
+          [createTheme().breakpoints.up("sm")]: {
+            padding: "20px",
           },
-          [createTheme().breakpoints.up('md')]: {
-            padding: '24px',
+          [createTheme().breakpoints.up("md")]: {
+            padding: "24px",
           },
-        }
-      }
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#000080", // Navy Blue para AppBar
+          color: "#FFFFFF",
+        },
+      },
     },
     MuiContainer: {
       styleOverrides: {
         root: {
-          paddingLeft: '16px',
-          paddingRight: '16px',
-          [createTheme().breakpoints.up('sm')]: {
-            paddingLeft: '24px',
-            paddingRight: '24px',
+          paddingLeft: "16px",
+          paddingRight: "16px",
+          [createTheme().breakpoints.up("sm")]: {
+            paddingLeft: "24px",
+            paddingRight: "24px",
           },
-        }
-      }
+        },
+      },
     },
     MuiTypography: {
       styleOverrides: {
         root: {
-          wordBreak: 'break-word',
-        }
-      }
-    }
-  }
+          wordBreak: "break-word",
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#DAA520", // Golden Rod para divisores
+          height: "2px",
+        },
+      },
+    },
+  },
 });
 
 // Aplica responsiveFontSizes ao tema
-export const theme = responsiveFontSizes(darkBlueTheme);
+export const theme = responsiveFontSizes(customTheme);

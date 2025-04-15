@@ -1,84 +1,184 @@
-import { Box, Typography, Button, Container, useTheme, useMediaQuery } from '@mui/material';
-import { keyframes } from '@emotion/react';
+import {
+  Box,
+  Typography,
+  Button,
+  Container,
+  useMediaQuery,
+  Stack,
+  Divider,
+  useTheme,
+} from "@mui/material";
+import { ContactForm } from "./ContactForm";
+import { useWhatsApp } from "../hooks/useWhatsapp";
 
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-const HeroSection = () => {
+export const HeroSection = () => {
+  const { onClick } = useWhatsApp();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery("(max-width:900px)");
 
   return (
     <Box
       sx={{
-        background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-        color: 'text.primary',
-        py: { xs: 6, sm: 8, md: 10 },
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden',
+        position: "relative",
+        height: "100vh",
+        width: "100%",
+        backgroundImage: "url('/images/hero-bg7.jpg')",
+        backgroundSize: "cover",
+        display: "flex",
+        flexDirection: "column",
+        color: theme.palette.text.primary,
+        overflow: "hidden",
+        pb: isMobile ? 10 : 20,
       }}
     >
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        <Typography
-          variant={isMobile ? 'h3' : isTablet ? 'h2' : 'h1'}
-          component="h1"
-          gutterBottom
+      {/* Header */}
+      <Box
+        sx={{
+          padding: { xs: 2, md: 3 },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: isMobile? "center": "",
+          ml: isMobile ? 0 : 50,
+        }}
+      >
+        <img style={{width: 200, zIndex: 10}} src="/images/jv-logo-white.png" alt="Foto do João Vitor Advogado" />
+      </Box>
+
+      {/* Main Content */}
+      <Container
+        maxWidth="xl"
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexGrow: 1,
+          alignItems: "center",
+        }}
+      >
+        <Box
           sx={{
-            fontWeight: 700,
-            mb: { xs: 2, md: 3 },
-            animation: `${fadeIn} 1s ease-out`,
-            lineHeight: 1.2,
-            px: { xs: 1, sm: 0 },
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            gap: isMobile ? 4 : 2,
+            width: "100%",
           }}
         >
-          Proteção Jurídica para Pessoas com Necessidades Especiais
-        </Typography>
-        
-        <Typography
-          variant={isMobile ? 'h6' : 'h5'}
-          component="p"
-          sx={{
-            mb: { xs: 3, md: 4 },
-            animation: `${fadeIn} 1s ease-out 0.2s forwards`,
-            opacity: 0,
-            maxWidth: 800,
-            mx: 'auto',
-            px: { xs: 2, sm: 0 },
-          }}
-        >
-          Curatela especializada com abordagem humanizada e técnica
-        </Typography>
-        
-        <Button
-          variant="contained"
-          color="secondary"
-          size={isMobile ? 'medium' : 'large'}
-          href="#contato"
-          sx={{
-            px: { xs: 3, md: 4 },
-            py: { xs: 1, md: 1.5 },
-            fontSize: { xs: '1rem', md: '1.1rem' },
-            fontWeight: 600,
-            color: 'primary.main',
-            animation: `${fadeIn} 1s ease-out 0.4s forwards`,
-            opacity: 0,
-            borderRadius: '8px',
-            transition: theme.transitions.create(['transform', 'box-shadow']),
-            '&:hover': {
-              transform: 'translateY(-3px)',
-              boxShadow: theme.shadows[4],
-            },
-          }}
-        >
-          Fale com um Especialista
-        </Button>
+          {/* Left Side - Text */}
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: 3,
+              paddingTop: isMobile ? 2 : 0,
+              paddingLeft: isMobile ? 0 : "5%",
+              maxWidth: isMobile ? "100%" : "50%",
+            }}
+          >
+            <Divider
+              sx={{
+                width: "120px",
+                height: "8px",
+                borderRadius: "4px",
+                backgroundColor: theme.palette.secondary.light,
+                my: 2,
+              }}
+            />
+
+            <Typography
+              variant="h1"
+              sx={{
+                background: `${theme.palette.primary.contrastText}`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                mb: 1,
+              }}
+            >
+              Curatela Especializada
+            </Typography>
+
+            <Typography
+              variant={isMobile ? "body1" : "h6"}
+              component="h2"
+              sx={{
+                color: theme.palette.text.primary,
+                maxWidth: "90%",
+                lineHeight: 1.6,
+                fontSize: isMobile ? "1.1rem" : "1.2rem",
+                "& span": {
+                  fontWeight: 700,
+                  color: theme.palette.secondary.main,
+                },
+              }}
+            >
+              Oferecemos processos de <span>curatela</span> com abordagem{" "}
+              <span>humanizada</span>, garantindo os <span>direitos</span> de
+              pessoas que necessitam de <span> proteção legal</span>, com
+              agilidade e sensibilidade jurídica.
+            </Typography>
+
+            <Stack
+              direction={isMobile ? "column" : "row"}
+              spacing={2}
+              sx={{ mt: 3 }}
+            >
+              <Button
+                variant="contained"
+                onClick={() => onClick()}
+                size="large"
+                sx={{
+                  padding: "14px 32px",
+                  fontSize: "1rem",
+                  backgroundColor: theme.palette.secondary.main,
+                  color: theme.palette.text.secondary,
+                  fontWeight: 600,
+                  borderRadius: "8px",
+                  "&:hover": {
+                    backgroundColor: theme.palette.secondary.dark,
+                    transform: "translateY(-2px)",
+                    boxShadow: `0 4px 12px ${theme.palette.secondary.main}80`,
+                  },
+                }}
+              >
+                Fale com um especialista
+              </Button>
+            </Stack>
+          </Box>
+
+          {/* Right Side - Form */}
+          {!isMobile && <ContactForm />}
+        </Box>
       </Container>
+
+      {/* Decorative Elements */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          width: "300px",
+          height: "300px",
+          backgroundColor: theme.palette.primary.main,
+          opacity: 0.05,
+          borderRadius: "50%",
+          transform: "translate(30%, 30%)",
+          zIndex: 0,
+        }}
+      />
+
+      <Box
+        sx={{
+          position: "absolute",
+          top: "-100px",
+          left: "-100px",
+          width: "300px",
+          height: "300px",
+          backgroundColor: theme.palette.secondary.main,
+          opacity: 0.08,
+          borderRadius: "50%",
+          zIndex: 0,
+        }}
+      />
     </Box>
   );
 };
-
-export default HeroSection;

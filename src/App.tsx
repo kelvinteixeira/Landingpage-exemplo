@@ -1,21 +1,23 @@
-import { CssBaseline, Box, Container } from "@mui/material";
-import Header from "./components/Header";
-import VideoStories from "./components/VideoSection";
-import ContactForm from "./components/ContactForm";
-import Footer from "./components/Footer";
+import { CssBaseline, Box } from "@mui/material";
+import { HeroSection } from "./components/HeroSection";
+import { CuratelaServices } from "./components/CuratelaServices";
+import { CuratelaExplanation } from "./components/CuratelaExplanation";
+import { CuratelaFAQ } from "./components/CuratelaFAQ";
+import {Footer} from "./components/Footer";
+import { WhatsAppButton } from "./components/WhatsappButton";
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <Box sx={{ backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
-        <Header />
-        <Container maxWidth="lg" sx={{ py: 8 }}>
-          <VideoStories />
-          <ContactForm />
-        </Container>
-        <Footer />
+      <Box sx={{ backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
+        <HeroSection />
+        <CuratelaServices />
+        <CuratelaExplanation/>
+        <CuratelaFAQ/>
       </Box>
+      <Footer/>
+      <WhatsAppButton />
     </>
   );
 }
