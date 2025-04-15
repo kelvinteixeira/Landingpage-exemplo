@@ -1,57 +1,72 @@
-# 🚀 Serviço de Landing Pages Profissionais
+# ⚖️ João Vitor Advocacia - Curatela e Direito Civil
 
-## 💡 Sobre o Projeto
+## 💼 Sobre o Projeto
 
-Solução completa para criação de landing pages de alta conversão, desenvolvida com as melhores práticas de:
+Aplicação web desenvolvida estrategicamente para o escritório **João Vitor Advocacia**, refletindo um compromisso sólido com:
 
-- **Design UI/UX** - Interfaces modernas e intuitivas  
-- **Performance** - Otimização para máxima velocidade  
-- **Conversão** - Elementos estratégicos para captação de leads  
-- **Responsividade** - Adaptação perfeita a todos os dispositivos  
+- **Excelência Jurídica**: Plataforma moderna e confiável, voltada para o direito das famílias e proteção de pessoas vulneráveis  
+- **Atendimento Humanizado**: Experiência digital intuitiva, com foco na confiança e acolhimento  
+- **Transparência e Ética**: Clareza na apresentação dos serviços e princípios profissionais  
 
-**Benefícios principais:**  
-✔ Templates profissionais prontos para uso  
-✔ Total personalização para sua marca  
-✔ Integração com ferramentas de marketing  
-✔ Analytics integrado para acompanhamento  
+Este projeto foi cuidadosamente estruturado para:  
+✔ Reforçar a autoridade no campo da curatela e direito civil  
+✔ Facilitar o acesso de clientes aos serviços jurídicos  
+✔ Apresentar conteúdos informativos e educativos sobre os direitos dos curatelados  
 
-![Preview 1](./public/images/showcase1.png)
-![Preview 2](./public/images/showcase2.png)
+<div align="center">
+  <img src="./public/images/showcase1.png" width="30%">
+  <img src="./public/images/showcase2.png" width="30%">
+  <img src="./public/images/showcase3.png" width="30%">
+</div>
 
-## ✨ Diferenciais
+---
 
-| Feature | Vantagem |
-|---------|----------|
-| Design Modular | Facilidade na customização |
-| SEO Otimizado | Melhor posicionamento |
-| CTAs Estratégicos | Maior taxa de conversão |
-| Formulários Inteligentes | Captação eficiente de leads |
-| Hospedagem Incluída | Solução completa |
+## ✨ Diferenciais Estratégicos
 
-> "Transforme visitantes em clientes com landing pages que realmente convertem"
+| Característica           | Benefício                                      |
+|--------------------------|------------------------------------------------|
+| Design Profissional      | Transmite confiança e seriedade                |
+| Conteúdo Jurídico Claro  | Facilita o entendimento de temas complexos     |
+| Responsividade Total     | Acesso otimizado via celular ou computador     |
+| SEO Jurídico             | Aumento da visibilidade nos mecanismos de busca|
+| Canal de Contato Rápido  | Agilidade na comunicação com o escritório      |
 
-## 🛠 Tecnologias
+> "Mais que um site, um ponto de apoio jurídico para quem mais precisa." — João Vitor, Advogado
 
-- React.js
-- TypeScript
-- Material UI
-- Vite.js
-- SEO Tools
+---
 
-## ⚙️ Como Usar
+## 🧠 Tecnologias Utilizadas
 
-**Pré-requisitos:**
-- Node.js (v18+)
-- npm/yarn
-- Git
+- React  
+- TypeScript  
+- Material UI  
+
+---
+
+## ✅ Requisitos para Rodar o Projeto
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Node.js](https://nodejs.org/en/)
+- [Git](https://gitforwindows.org/)
+
+### ⚙️ Instalação e Execução
 
 ```bash
-# Clonar repositório
-https://github.com/kelvinteixeira/Landingpage-exemplo.git
+# Clone o repositório
+git clone https://github.com/kelvinteixeira/codevibe.git
+
+# Acesse o diretório do projeto
 cd codevibe
 
-# Instalar dependências
+# Instale as dependências
+yarn
+# ou
 npm install
 
-# Rodar ambiente de desenvolvimento
+# Inicie a aplicação
+yarn dev
+# ou
 npm run dev
+
+# Acesse no navegador:
+http://localhost:5173/
