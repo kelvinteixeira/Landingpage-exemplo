@@ -39,7 +39,10 @@ Este projeto foi cuidadosamente estruturado para:
 
 - React  
 - TypeScript  
-- Material UI  
+- Material UI
+- Formspree
+- Remask
+- Framer motion
 
 ---
 
