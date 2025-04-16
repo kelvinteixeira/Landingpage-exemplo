@@ -61,7 +61,7 @@ export const CuratelaFAQ = () => {
 
   const faqItems = [
     {
-      question: "O que é a curatela e quando é necessária?",
+      question: "Quando é necessária a curatela?",
       answer:
         "A curatela é um instituto jurídico que protege maiores de idade que não possuem plena capacidade civil, como pessoas com deficiência mental, doenças degenerativas ou dependência química. É necessária quando o indivíduo não consegue praticar atos da vida civil sem comprometer seu patrimônio ou bem-estar.",
     },
@@ -76,7 +76,7 @@ export const CuratelaFAQ = () => {
         "O processo inicia com uma ação judicial acompanhada de laudos médicos que comprovem a incapacidade. É necessário contratar um advogado especializado, que irá protocolar a petição inicial e acompanhar todo o trâmite, incluindo a avaliação do juiz e as perícias médicas.",
     },
     {
-      question: "Quanto tempo dura o processo?",
+      question: "Quanto tempo dura o processo de curatela?",
       answer:
         "O tempo médio varia entre 3 a 12 meses, dependendo da complexidade do caso, da necessidade de perícias médicas e da agenda do judiciário local. Processos urgentes podem ser acelerados mediante comprovação de risco ao curatelado.",
     },

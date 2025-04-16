@@ -65,32 +65,13 @@ export const HeroSection = () => {
         backgroundImage: "url('/images/hero-bg7.jpg')",
         backgroundSize: "cover",
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
         color: theme.palette.text.primary,
         overflow: "hidden",
-        pb: isMobile ? 10 : 20,
+        // pb: isMobile ? 10 : 20,
       }}
     >
       {/* Header */}
-      <Box
-        component={motion.div}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        sx={{
-          padding: { xs: 2, md: 3 },
-          display: "flex",
-          alignItems: "center",
-          justifyContent: isMobile ? "center" : "",
-          ml: isMobile ? 0 : 50,
-        }}
-      >
-        <img 
-          style={{ width: 200, zIndex: 10 }} 
-          src="/images/jv-logo-white.png" 
-          alt="Foto do João Vitor Advogado" 
-        />
-      </Box>
 
       {/* Main Content */}
       <Container
@@ -127,6 +108,24 @@ export const HeroSection = () => {
               maxWidth: isMobile ? "100%" : "50%",
             }}
           >
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              sx={{
+                padding: { xs: 2, md: 3 },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: isMobile ? "center" : "",
+              }}
+            >
+              <img
+                style={{ width: 200, zIndex: 10 }}
+                src="/images/jv-logo-white.png"
+                alt="Foto do João Vitor Advogado"
+              />
+            </Box>
             <Divider
               component={motion.div}
               variants={itemVariants}
@@ -183,7 +182,7 @@ export const HeroSection = () => {
             >
               <Button
                 component={motion.button}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   boxShadow: `0 4px 12px ${theme.palette.secondary.main}80`,
                 }}

@@ -23,3 +23,8 @@
   font-style: normal;
   font-display: swap; /* Melhora performance de carregamento */
 }
+
+html {
+  scrollbar-color: #000080 #E6B949 ;
+}
+
